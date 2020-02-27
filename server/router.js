@@ -2,7 +2,7 @@ const path = require("path");
 const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const express = require("express")
+const express = require("express");
 const { helloWorld } = require("./controllers");
 
 class Routing {
@@ -13,7 +13,6 @@ class Routing {
 
   configure() {
     const { app, io } = this;
-    console.log(process.env.NODE_ENV);
     if (process.env.NODE_ENV === "development") {
       app.use(cors());
       app.use(morgan("dev"));
@@ -22,7 +21,7 @@ class Routing {
     app.use(bodyParser.raw());
     app.use(bodyParser.text({ type: "text/*" }));
     app.disable("x-powered-by");
-  app.use(express.static("client/build"));
+    app.use(express.static("client/build"));
     app.use((req, res, next) => {
       req.socket = io;
       next();

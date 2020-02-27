@@ -7,10 +7,5 @@ export const routes = [
     path: "/",
     name: "home",
     Component: withRouter(Home),
-  },
-    {
-    path: "/test",
-    name: "test",
-    Component: props => <span>TEST</span>,
-  },
+  }
 ];
