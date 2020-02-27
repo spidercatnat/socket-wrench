@@ -8,7 +8,6 @@ async function start() {
   const io = await socket({ app });
   await router({ app, io });
   const port = process.env.PORT || 8080;
-  app.use(express.static("client/build"));
   app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
   });
