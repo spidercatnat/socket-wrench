@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider } from "./context";
 import { Router } from "./router";
-import "./App.css";
 
 /** To do
  * - If not logged in, render without edit mode.
