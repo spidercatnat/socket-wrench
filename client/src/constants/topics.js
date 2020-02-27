@@ -1,3 +1,3 @@
 export const topics = {
-    MY_EVENT: "MY_EVENT"
+    MY_TOPIC: "MY_TOPIC"
 }
