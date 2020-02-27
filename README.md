@@ -1,5 +1,8 @@
 # socket-wrench
 
+### Before you start
+Stick a `.env` file in `client` that contains `REACT_APP_SOCKET_PORT=9998`
+
 ### Quickstart
 
 - Install dependencies for `/server` and `/client` and build with `yarn setup`
