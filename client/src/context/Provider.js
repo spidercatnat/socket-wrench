@@ -7,13 +7,12 @@ const { REACT_APP_SOCKET_PORT: SOCKET_PORT } = process.env;
 const SOCKET_HOST = window.location.hostname;
 
 class Provider extends Component {
-  constructor() {
-    super();
-    this.state = {
-      hello_socketio: ""
-    };
-    this.socket = io(`http://${SOCKET_HOST}:${SOCKET_PORT}`);
-  }
+
+  state = {
+    hello_socketio: ""
+  };
+
+  socket = io(`http://${SOCKET_HOST}:${SOCKET_PORT}`);
 
   testApiCall = async () => {
     const apiCall = await fetch(`http://localhost:8080/api/test-endpoint`);

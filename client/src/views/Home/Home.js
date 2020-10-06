@@ -9,7 +9,7 @@ const Home = connect(
         props: { hello_socketio }
       } = this;
       return (
-        <HelloWorld hello_socketio={hello_socketio} topic="TEST_SUBSCRIPTION" />
+        <HelloWorld topic="TEST_SUBSCRIPTION" hello_socketio={hello_socketio} />
       );
     }
   }

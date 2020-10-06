@@ -4,11 +4,9 @@ import React from "react";
 
 // PubSub example:
 import { subscribe } from "../../pubsub/with-emitter";
-export const HelloWorld = props => {
-    return subscribe(({ topic, data }) => {
+export const HelloWorld = props => subscribe(({ topic, data }) => {
     return <span>{topic}: {data} | {props.hello_socketio}</span>
-    }, props.topic);
-};
+}, props.topic);
 
 // Then use this component elsewhere:
 // <HelloWorld topic={MY_TOPIC} {...anyOtherProps} />
