@@ -1,7 +1,7 @@
-import React, { Component, createRef } from "react";
+import React, { Component } from "react";
 import io from "socket.io-client";
 import { Context } from "./";
-import { publisher } from "../pubsub/with-emitter";
+import { publisher } from "../pubsub";
 
 const { REACT_APP_SOCKET_PORT: SOCKET_PORT } = process.env;
 const SOCKET_HOST = window.location.hostname;
@@ -9,24 +9,21 @@ const SOCKET_HOST = window.location.hostname;
 class Provider extends Component {
 
   state = {
-    hello_socketio: ""
+    passedDownFromProvider: ""
   };
 
-  socket = io(`http://${SOCKET_HOST}:${SOCKET_PORT}`);
-
-  testApiCall = async () => {
-    const apiCall = await fetch(`http://localhost:8080/api/test-endpoint`);
-    console.log(await apiCall.json());
-  }
+  socket = io(`http://${SOCKET_HOST}:${SOCKET_PORT || 9998}`);
 
   testSocketConn = () => {
-    this.socket.on("HELLO_CLIENT", hello_socketio => this.setState({ hello_socketio }));
+    this.socket.on("HELLO_CLIENT", data => {
+      publisher.send("HELLO_CLIENT", { data });
+    });
     this.socket.emit("HELLO_SERVER", "♫ Hello from the client side! ♫");
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.testSocketConn();
-    publisher.send("TEST_SUBSCRIPTION", { data: "Success!" })
+    this.setState({ passedDownFromProvider: "ฅ^•ﻌ•^ฅ" });
   }
 
   render() {

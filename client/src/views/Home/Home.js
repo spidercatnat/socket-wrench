@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import { HelloWorld } from "../../components"
+import { HelloWorld } from "../../components";
 import { connect } from "../../context";
 
 const Home = connect(
   class extends Component {
     render() {
       const {
-        props: { hello_socketio }
+        props: { passedDownFromProvider },
       } = this;
       return (
-        <HelloWorld topic="TEST_SUBSCRIPTION" hello_socketio={hello_socketio} />
+        <HelloWorld topic="HELLO_CLIENT" {...{ passedDownFromProvider }} />
       );
     }
   }

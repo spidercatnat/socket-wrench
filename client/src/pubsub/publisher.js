@@ -1,13 +1,13 @@
-import { ReplaySubject } from "rxjs";
-/** TODO:
- *  - Ensure singularity by converting into a true singleton class
- */
+import EventEmitter from 'eventemitter3';
 
-const subject = new ReplaySubject();
+const eventEmitter = new EventEmitter();
 
-export const publisher = {
-  sendMessage: (topic, data) => {
-    subject.next({ topic, data });
-  },
-  getMessage: () => subject.asObservable()
-};
+const publisher = {
+  subscribe: (event, fn) => eventEmitter.on(event, fn),
+  unsubscribe: (event, fn) => eventEmitter.off(event, fn),
+  send: (event, payload) => eventEmitter.emit(event, payload)
+}
+
+Object.freeze(publisher);
+
+export { publisher }
