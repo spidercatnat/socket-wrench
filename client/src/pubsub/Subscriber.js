@@ -2,18 +2,20 @@ import { Component, cloneElement, Children } from "react";
 import { publisher } from ".";
 
 class Subscriber extends Component {
-    state = { data: null };
-    
-    componentDidMount() {
-        this.subscription = publisher
-            .subscribe(this.props.topic, msg => {
-                this.setState({ data: msg.data });
-            });
-        this.unsubscribe = () => this.subscription.unsubscribe();
+    state = publisher.getState(this.props.topic) // get initial state
+
+    onMessage = msg => {
+        this.setState({ ...msg });
+        return this.state;
     }
 
+    componentDidMount() {
+        this.subscription = publisher
+            .subscribe(this.props.topic, this.onMessage);
+    }
+    
     componentWillUnmount() {
-        this.unsubscribe();
+        publisher.unsubscribe(this.props.topic, this.onMessage);
     }
 
     render() {
