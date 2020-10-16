@@ -1,3 +1,3 @@
 export { Subscriber } from './Subscriber';
 export { publisher } from './publisher';
-export { subscribe } from './subscribe'
+export { subscribe, withSubscription } from './subscribe'

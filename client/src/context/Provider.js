@@ -9,21 +9,21 @@ const SOCKET_HOST = window.location.hostname;
 class Provider extends Component {
 
   state = {
-    passedDownFromProvider: ""
+    passedDownFromProvider:  "ฅ^•ﻌ•^ฅ" 
   };
 
   socket = io(`http://${SOCKET_HOST}:${SOCKET_PORT || 9998}`);
 
   testSocketConn = () => {
-    this.socket.on("HELLO_CLIENT", data => {
-      publisher.send("HELLO_CLIENT", { data });
+    this.socket.on("CONTROL_SET", payload => {
+      publisher.dispatch(payload.key, payload);
+      // console.log(payload)
     });
     this.socket.emit("HELLO_SERVER", "♫ Hello from the client side! ♫");
   }
 
   componentDidMount() {
     this.testSocketConn();
-    this.setState({ passedDownFromProvider: "ฅ^•ﻌ•^ฅ" });
   }
 
   render() {

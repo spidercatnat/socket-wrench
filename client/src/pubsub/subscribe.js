@@ -8,3 +8,16 @@ export const subscribe = (Comp, topic) => {
     </Subscriber>
   );
 };
+
+export const withSubscription = (Comp, props) => {
+  const WrappedComponent = class extends React.Component {
+    render() {
+      return (
+        <Subscriber {...props}>
+          <Comp />
+        </Subscriber>
+      )
+    }
+  }
+  return <WrappedComponent />
+}

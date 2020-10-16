@@ -2,10 +2,11 @@ const { HELLO_SERVER, HELLO_CLIENT } = require("./socket-events");
 
 module.exports = socket => {
   console.log("A client connected.");
-  
+
   socket.on(HELLO_SERVER, async message => {
     console.log(message);
-    socket.emit(HELLO_CLIENT, "♫ Hello from the server side! ♫");
+    socket.emit("CONTROL_SET", { key: "VOLUME", value: 67 });
+    socket.emit("CONTROL_SET", { key: "PAN", value: 23 });
   });
 
   socket.on("error", error =>
